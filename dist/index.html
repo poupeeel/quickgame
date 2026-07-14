@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bailey & Skrappi: Hearts Entwined</title>
+  <!-- SEO & Social Sharing -->
+  <meta name="description" content="An interactive romantic visual novel and dating simulator featuring the love story between Bailey and Skrappi. Build your connection, play romantic mini-games, and unlock special intimate moments.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-BbqKhFiv.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Cp431Vqc.css">
+</head>
+<body>
+
+  <!-- Ambient Sound / Synth Control -->
+  <button id="sound-toggle" class="sound-btn" aria-label="Toggle Sound">
+    <svg viewBox="0 0 24 24" width="24" height="24">
+      <path id="sound-icon-path" fill="currentColor" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM12 4L9.91 6.09 12 8.18V4zm-8 8H6l5 5v-3.18l-5-5H4v8zM19 12c0 3.58-2.5 6.58-6 7.42v2.06c4.62-.9 8-4.94 8-9.48s-3.38-8.58-8-9.48v2.06c3.5.84 6 3.84 6 7.42z"/>
+    </svg>
+  </button>
+
+  <!-- Background Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Main Game Container -->
+  <main id="game-container">
+    
+    <!-- SCREEN 1: START SCREEN -->
+    <section id="start-screen" class="game-screen active">
+      <div class="glow-container">
+        <h1 class="game-title">Hearts Entwined</h1>
+        <p class="game-subtitle">The Romantic Story of Bailey & Skrappi</p>
+      </div>
+      <div class="heartbeat-logo">❤️</div>
+      <button id="start-game-btn" class="glow-btn">Begin Love Story</button>
+      <button id="open-gallery-btn" class="outline-btn">Art Gallery</button>
+    </section>
+
+    <!-- SCREEN 2: ACTIVE ROMANCE SCREEN (Interactive Sandbox Game) -->
+    <section id="story-screen" class="game-screen">
+      <!-- Top Bar: Love Connection Meter -->
+      <div class="top-status-bar">
+        <div class="love-meter-container">
+          <span class="love-icon">💖</span>
+          <div class="love-bar-track">
+            <div id="love-bar-fill" style="width: 30%;"></div>
+          </div>
+          <span id="love-percent">30%</span>
+        </div>
+        <div class="current-chapter">Interactive Playground: Bailey & Skrappi</div>
+        <button id="end-playground-btn" class="outline-btn" style="padding: 6px 14px; font-size: 0.8rem;">Finish Date</button>
+      </div>
+
+      <!-- Full-screen Sandbox Game Playground Canvas Container -->
+      <div class="playground-wrapper">
+        <canvas id="game-sandbox-canvas"></canvas>
+
+        <!-- Dynamic Action Chimes Overlay text notification bubble -->
+        <div id="action-speech-bubble" class="speech-bubble hidden">
+          Hello!
+        </div>
+
+        <!-- Touch/Mouse Virtual Joysticks & Action Buttons UI -->
+        <div class="sandbox-controls-container glass-panel">
+          <!-- Directional buttons for moving Bailey -->
+          <div class="joystick-column">
+            <span class="control-label">Move Bailey</span>
+            <div class="dpad-grid">
+              <div></div>
+              <button id="dpad-up" class="dpad-btn" aria-label="Move Up">▲</button>
+              <div></div>
+              <button id="dpad-left" class="dpad-btn" aria-label="Move Left">◀</button>
+              <div class="dpad-center">●</div>
+              <button id="dpad-right" class="dpad-btn" aria-label="Move Right">▶</button>
+              <div></div>
+              <button id="dpad-down" class="dpad-btn" aria-label="Move Down">▼</button>
+              <div></div>
+            </div>
+          </div>
+
+          <!-- Direct Romantic Actions Buttons -->
+          <div class="actions-column">
+            <span class="control-label">Romantic Interactions</span>
+            <div class="actions-grid">
+              <button id="action-kiss-btn" class="interaction-btn glow-pink">💋 Kiss him</button>
+              <button id="action-hug-btn" class="interaction-btn glow-purple">🤗 Wrap Hug</button>
+              <button id="action-cheeks-btn" class="interaction-btn glow-orange">😊 Touch Cheek</button>
+              <button id="action-tickle-btn" class="interaction-btn glow-gold">✨ Tickle Waist</button>
+              <button id="action-flirt-btn" class="interaction-btn glow-blue">💬 Flirt/Wink</button>
+              <button id="action-snuggle-btn" class="interaction-btn glow-rose">🛏️ Bed Snuggle</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: ENDING SCREEN -->
+    <section id="ending-screen" class="game-screen">
+      <div class="glass-panel ending-card">
+        <div class="ending-heart">💖</div>
+        <h2 class="ending-title" id="ending-title-text">Perfect Harmony</h2>
+        <p class="ending-description" id="ending-description-text">Bailey and Skrappi shared an unforgettable, deeply passionate night of love and complete intimacy, bound together forever.</p>
+        <div class="ending-stats">
+          <span id="final-love-score">Final Love Match: 95%</span>
+        </div>
+        <div class="ending-actions">
+          <button id="restart-game-btn" class="glow-btn">Replay Story</button>
+          <button id="ending-gallery-btn" class="outline-btn">View Gallery CGs</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: ART GALLERY -->
+    <section id="gallery-screen" class="game-screen">
+      <div class="gallery-header">
+        <h2 class="section-title">Romantic Gallery</h2>
+        <button id="close-gallery-btn" class="outline-btn">Back to Menu</button>
+      </div>
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Gallery cards injected by JS -->
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
